@@ -3,8 +3,8 @@ Program Defect
 implicit none
 character(20)                    ::  fname_sub, task_sub
 integer                          ::  maxp_sub, mesh_sub(3), nspin_sub, nsm_sub,i_x,i_s
-real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub
-real(kind=8) ,allocatable,dimension(:,:,:,:)  ::  f_normal_sub
+real ,allocatable,dimension(:,:)  ::  f_sub !(kind=8)
+real ,allocatable,dimension(:,:,:,:)  ::  f_normal_sub
 integer                          ::  i2,i3,ip,is,ind,inner_counter,outer_counter
 double precision                 ::  cell_sub(3,3)!,dcell_sub(3,3)
 logical                          ::  found_sub,check
@@ -14,7 +14,7 @@ real,parameter                   ::  bohr_to_ang=0.529177
 !**********************************************************************
 !write(*,*) "Please Enter the File Name: "   
 !read(*,*)  fname_sub  
-fname_sub='ZrO2-G.RHO'
+fname_sub='ZrO2-G.VT'
 task_sub='read'
 nsm_sub=1
 !=.TRUE.
@@ -32,6 +32,10 @@ write (*,*)  " The Lattice Vector is in Ang"
 write (*,100) cell_sub(1,1)*bohr_to_ang, cell_sub(1,2)*bohr_to_ang, cell_sub(1,3)*bohr_to_ang
 write (*,100) cell_sub(2,1)*bohr_to_ang, cell_sub(2,2)*bohr_to_ang, cell_sub(2,3)*bohr_to_ang
 write (*,100) cell_sub(3,1)*bohr_to_ang, cell_sub(3,2)*bohr_to_ang, cell_sub(3,3)*bohr_to_ang
+write (*,*)  " The Lattice Vector is in Bohr"
+write (*,100) cell_sub(1,1), cell_sub(1,2), cell_sub(1,3)
+write (*,100) cell_sub(2,1), cell_sub(2,2), cell_sub(2,3)
+write (*,100) cell_sub(3,1), cell_sub(3,2), cell_sub(3,3)
 
 write (*,*) "the number of spins (nspin_sub) :" , nspin_sub
 write (*,*) "the nubmer of mesh point (mesh_sub):" , mesh_sub
@@ -42,11 +46,10 @@ write (*,*) "the number of maximum mesh point (maxp) :" , maxp_sub
 allocate(f_sub(maxp_sub,nspin_sub))
 call iorho(task_sub,fname_sub,cell_sub,mesh_sub,nsm_sub,maxp_sub,nspin_sub,f_sub,found_sub)!
 
-101 format ("For spin=",2(5X,I10),E25.10)
+101 format ("For spin=",2 (5X,I10),E25.10)
 do i_s=1,nspin_sub 
     do i_x=1,maxp_sub 
-        write(*,101) i_s,i_x, f_sub(i_x,2)
-!        write(*,101) i_s,i_x, f_sub(i_x,i_s)
+        write(*,101) i_s,i_x, f_sub(i_x,i_s)
     end do
 end do
 
@@ -62,10 +65,9 @@ do is = 1,nspin_sub
         do i2 = 1,mesh_sub(2)
             do ip=1,mesh_sub(1)        
                 f_normal_sub(ip,i2,i3,is)=f_sub(ind+ip,is)
-!                write(*,*) ip,i2,i3,is,f_normal_sub(ip,i2,i3,is)   
                 inner_counter=inner_counter+1
                 outer_counter=outer_counter+1
-                !write(*,*)ip,i2,i3,is,inner_counter,outer_counter,f_sub(inner_counter,is)
+                write(*,*)ip,i2,i3,is,inner_counter,outer_counter,f_sub(inner_counter,is)
             end do
         enddo
     enddo
@@ -152,14 +154,14 @@ subroutine iorho( task, fname, cell, mesh, nsm, maxp, nspin, f, found )!
         read(1) cell
         read(1) mesh, ns
       endif
-      !write (*,*) "Founded"
+!      write (*,*) "Founded"
 ! Read density (only if array f is large enough)
       np = mesh(1) * mesh(2) * mesh(3)
       if (ns.gt.nspin .or. np.gt.maxp) then
         maxp = np
       else
         if (fform .eq. 'formatted') then
-          !ind = 0  THIS IS THE BUG FOR READING
+!          ind = 0  !THIS IS THE BUG FOR READING
           do is = 1,ns
             ind = 0
             do i3 = 1,mesh(3)
@@ -170,7 +172,7 @@ subroutine iorho( task, fname, cell, mesh, nsm, maxp, nspin, f, found )!
             enddo
           enddo
         else
-!          ind = 0  THIS IS THE BUG FOR READING
+!          ind = 0  !THIS IS THE BUG FOR READING
           do is = 1,ns
             ind = 0
             do i3 = 1,mesh(3)
