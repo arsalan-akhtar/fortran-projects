@@ -31,6 +31,7 @@ C *********************************************************************
 
 C     Modules
       use precision,   only : dp, grid_p
+!aakhtar
       use sys,         only : die
       use m_fft,       only : fft     ! 3-D fast Fourier transform
       use cellsubs,    only : reclat  ! Finds reciprocal lattice vectors
@@ -86,7 +87,9 @@ C     Find reciprocal lattice vectors
 !$OMP end parallel workshare
          !  print *, "sum(rho)*dvol", sum(rho)*volume/dble(ng)
       else
+!aakhtar
          call die("wrong fft direction")
+!          write("wrong fft direction")
       endif
 
 C     Stop time counter

@@ -110,11 +110,11 @@ C
       real(dp)
      .  scale
       real(dp), dimension(:,:), pointer, save ::   trigs => null()
-#ifdef MPI
-      integer
-     .  n1lf, nrem, Py, Pz
-      real(grid_p), dimension(:), pointer  ::   ft
-#endif
+!#ifdef MPI
+!      integer
+!     .  n1lf, nrem, Py, Pz
+!      real(grid_p), dimension(:), pointer  ::   ft
+!#endif
 
       save OldMesh
       data OldMesh/0,0,0/
