@@ -19,8 +19,8 @@ SIESTA_ARCH = unknown
 
 CC = gcc
 FPP = $(FC) -E -P -x c
-FC = mpif90
-#FC_SERIAL = gfortran
+FC = gfortran
+FC_SERIAL = gfortran
 
 FFLAGS = -O2 -fPIC -ftree-vectorize
 
@@ -33,27 +33,14 @@ SP_KIND = 4
 DP_KIND = 8
 KINDS = $(SP_KIND) $(DP_KIND)
 
+LDFLAGS =
 
+COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a
 
-COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a libfdict.a
-#BLAS_LIBS = -lblas
-#LAPACK_LIBS = -llapack
-BLACS_LIBS=/usr/lib/libblacsF77init-openmpi.so /usr/lib/libblacsCinit-openmpi.so /usr/lib/libblacs-openmpi.so
-SCALAPACK_LIBS=/usr/lib/libscalapack-openmpi.so
+FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT
 
-#LIB_FLOOK=-L/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Docs/build/flook/0.7.0/lib 
+LIBS =
 
-FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP -DSIESTA__FLOOK
-
-LIBS =  $(NETCDF_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(MPI_LIBS) $(COMP_LIBS) $(BLACS_LIBS) $(LIB_FLOOK) -lflookall -ldl
-INCFLAGS += -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Docs/build/flook/0.7.0/include
-LDFLAGS +=-L/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Docs/build/flook/0.7.0/lib -Wl,-rpath=/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Docs/build/flook/0.7.0/lib
-
-
-FLOOK_PATH=/path/to/flook/parent
-
-MPI_INTERFACE = libmpi_f90.a
-MPI_INCLUDE = .
 # Dependency rules ---------
 
 FFLAGS_DEBUG = -g -O1   # your appropriate flags here...
