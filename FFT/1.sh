@@ -1,12 +1,25 @@
 #ls
 rm *.o *.mod
 #cd CML/
-#make clean
+cd fdf/
+make clean
+make module
+cd ../wxml
+make clean
 make
-#cd ..
+cd ../xmlparser
+make clean
+make
+cd ..
 #-O2 -fPIC -ftree-vectorize
 #gfortran -c -O2 -fPIC -ftree-vectorize mpi_interfaces.F
 #gfortran -c -O2 -fPIC -ftree-vectorize mpi_siesta.F90
+gcc -c sockets.c
+gfortran -c -O2 -fPIC -ftree-vectorize fsockets.f90
+#-----------------------------------------------------------------------
+gfortran -c -O2 -fPIC -ftree-vectorize io_fdf.F90
+#-----------------------------------------------------------------------
+gfortran -c -O2 -fPIC -ftree-vectorize pxf.F90
 #-----------------------------------------------------------------------
 gfortran -c -O2 -fPIC -ftree-vectorize precision.F 
 #-----------------------------------------------------------------------
@@ -28,44 +41,48 @@ gfortran -c -O2 -fPIC -ftree-vectorize parallel.F
 
 
 gfortran -c -O2 -fPIC -ftree-vectorize siesta_cml.f90 
-gfortran -c -O2 -fPIC -ftree-vectorize sys.F 
+gfortran -c -O2 -fPIC -ftree-vectorize sys.F
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize m_io.f 
-#gfortran -c -O2 -fPIC -ftree-vectorize alloc.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize die.F 
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize cellsubs.f 
+gfortran -c -O2 -fPIC -ftree-vectorize m_io.f 
+gfortran -c -O2 -fPIC -ftree-vectorize alloc.F90 
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize spatial.F
+gfortran -c -O2 -fPIC -ftree-vectorize cellsubs.f 
+#-----------------------------------------------------------------------
+gfortran -c -O2 -fPIC -ftree-vectorize spatial.F
 
-#gfortran -c -O2 -fPIC -ftree-vectorize printmatrix.F 
-#gfortran -c -O2 -fPIC -ftree-vectorize schecomm.F
+gfortran -c -O2 -fPIC -ftree-vectorize printmatrix.F 
+gfortran -c -O2 -fPIC -ftree-vectorize schecomm.F
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize class_OrbitalDistribution.F90
-#gfortran -c -O2 -fPIC -ftree-vectorize class_Sparsity.F90
-#gfortran -c -O2 -fPIC -ftree-vectorize class_Data1D.F90
-#gfortran -c -O2 -fPIC -ftree-vectorize class_SpData1D.F90 
-#gfortran -c -O2 -fPIC -ftree-vectorize class_Data2D.F90 
-#gfortran -c -O2 -fPIC -ftree-vectorize class_SpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize class_OrbitalDistribution.F90
+gfortran -c -O2 -fPIC -ftree-vectorize class_Sparsity.F90
+gfortran -c -O2 -fPIC -ftree-vectorize class_Data1D.F90
+gfortran -c -O2 -fPIC -ftree-vectorize class_SpData1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize class_Data2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize class_SpData2D.F90 
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize class_Geometry.F90 
-#gfortran -c -O2 -fPIC -ftree-vectorize class_Pair_Geometry_SpData2D.F90 
-#gfortran -c -O2 -fPIC -ftree-vectorize class_Fstack_Pair_Geometry_SpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize class_Geometry.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize class_Pair_Geometry_SpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize class_Fstack_Pair_Geometry_SpData2D.F90 
+
+gfortran -c -O2 -fPIC -ftree-vectorize  m_io_s.F90
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize sparse_matrices.F 
+gfortran -c -O2 -fPIC -ftree-vectorize sparse_matrices.F 
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize domain_decom.F
+gfortran -c -O2 -fPIC -ftree-vectorize domain_decom.F
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize parallelsubs.F
+gfortran -c -O2 -fPIC -ftree-vectorize parallelsubs.F
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize mesh.F 
+gfortran -c -O2 -fPIC -ftree-vectorize mesh.F 
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize fft1d.F 
+gfortran -c -O2 -fPIC -ftree-vectorize fft1d.F 
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize m_walltime.f90 
-#gfortran -c -O2 -fPIC -ftree-vectorize moreParallelSubs.F90 
-#gfortran -c -O2 -fPIC -ftree-vectorize m_timer.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize m_walltime.f90 
+gfortran -c -O2 -fPIC -ftree-vectorize moreParallelSubs.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize m_timer.F90 
 #-----------------------------------------------------------------------
-#gfortran -c -O2 -fPIC -ftree-vectorize fft.F  
+gfortran -c -O2 -fPIC -ftree-vectorize fft.F  
 #-----------------------------------------------------------------------
 #FFT 
 #-----------------------------------------------------------------------

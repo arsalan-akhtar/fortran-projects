@@ -1,0 +1,599 @@
+
+Compilation architecture to be used: unknown
+If this is not what you want, create the right
+arch.make file using the models in Src/Sys
+
+Hit ^C to abort...
+
+==> Incorporating information about present compilation (compiler and flags)
+make "FPPFLAGS=-DFC_HAVE_ABORT" compinfo.o
+make[1]: Entering directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing'
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  compinfo.F90 
+make[1]: Leaving directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing'
+
+(cd fdf ; make -j 1 "VPATH=/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf" \
+	    "FPPFLAGS=-DFC_HAVE_ABORT" \
+	    "FFLAGS=-O2 -fPIC -ftree-vectorize" module )
+make[1]: Entering directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/fdf'
+In fdf, INCFLAGS is: -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf      -I../
+gfortran -c -O2 -fPIC -ftree-vectorize -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf      -I../ -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf/iso_fortran_env.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf      -I../ -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf/prec.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf      -I../ -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf/utils.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf      -I../ -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf/io_fdf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf      -I../ -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf/parse.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf      -I../ -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf/fdf.F90 
+ar  cru libfdf.a \
+                iso_fortran_env.o fdf.o io_fdf.o parse.o utils.o prec.o 
+ranlib libfdf.a
+cp libfdf.a ..
+make[1]: Leaving directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/fdf'
+(cd wxml ; make -j 1 "VPATH=/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml" \
+FFFLAGS="-O2 -fPIC -ftree-vectorize" module)
+make[1]: Entering directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/wxml'
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_error.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_escape.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_buffer.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_array_str.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_dictionary.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_elstack.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_text.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_core.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wxml_overloads.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/flib_wxml.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/flib_wstml.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/m_wcml_coma.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/wxml/flib_wcml.f90
+ar  cru libwxml.a m_wxml_buffer.o m_wxml_array_str.o m_wxml_dictionary.o m_wxml_elstack.o m_wxml_text.o m_wxml_escape.o  m_wxml_core.o m_wxml_overloads.o flib_wxml.o flib_wstml.o flib_wcml.o m_wxml_error.o m_wcml_coma.o
+ranlib libwxml.a
+cp libwxml.a ..
+make[1]: Leaving directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/wxml'
+(cd xmlparser ; make -j 1 "VPATH=/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser" \
+FFFLAGS="-O2 -fPIC -ftree-vectorize" module)
+make[1]: Entering directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/xmlparser'
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_debug.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_buffer.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_elstack.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_dictionary.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_io.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_reader.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_converters.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_charset.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_xml_error.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_entities.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_fsm.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/m_xml_parser.f90
+gfortran -c -O2 -fPIC -ftree-vectorize  -I../wxml   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xmlparser/flib_sax.f90
+ar  cru libxmlparser.a m_debug.o m_buffer.o m_elstack.o m_dictionary.o m_io.o m_reader.o m_converters.o m_charset.o  m_entities.o m_xml_error.o  m_fsm.o  m_xml_parser.o flib_sax.o
+ranlib libxmlparser.a
+cp libxmlparser.a ..
+make[1]: Leaving directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/xmlparser'
+(cd SiestaXC ; make -j 1 \
+                    "VPATH_ROOT=/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src"  \
+            "INCFLAGS=-I../MPI" \
+	    "FFLAGS=-O2 -fPIC -ftree-vectorize" module )
+make[1]: Entering directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/SiestaXC'
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_OrbitalDistribution.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/parallel.F 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/debugmpi.F 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/local_sys.F 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_io.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/precision.F 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/alloc.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/bessph.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cellsubs.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/sorting.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/minvec.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/chkgmx.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fft1d.F 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/interpolation.f90
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/moreParallelSubs.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_walltime.f90
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_timer.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/timer_tree.f90
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pxf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_fft_gpfa.F 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/radfft.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/timer.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/ldaxc.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/am05.f90
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/ggaxc.f
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/mesh1d.f90
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/debugxc.f90
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/vv_vdwxc.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/vdwxc.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/xcmod.f90
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/atomxc.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/array.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/mesh3d.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/fft3d.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/fftr.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/cellxc.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize -I../MPI -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/SiestaXC/siestaxc.F90 
+ar  cru libSiestaXC.a alloc.o bessph.o cellsubs.o debugmpi.o chkgmx.o fft1d.o interpolation.o minvec.o m_io.o moreParallelSubs.o class_OrbitalDistribution.o m_timer.o timer_tree.o m_walltime.o parallel.o precision.o pxf.o radfft.o m_fft_gpfa.o sorting.o timer.o atomxc.o cellxc.o debugxc.o ggaxc.o ldaxc.o siestaxc.o vdwxc.o xcmod.o fft3d.o fftr.o mesh1d.o mesh3d.o am05.o vv_vdwxc.o array.o local_sys.o 
+ranlib libSiestaXC.a
+cp *.mod *.a ..
+make[1]: Leaving directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/SiestaXC'
+==> Compiling libsiestaLAPACK.a in Libs...
+make[1]: Entering directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/Libs'
+gfortran -c -O2 -fPIC -ftree-vectorize  -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/Libs/lapack.F 
+ar  cru libsiestaLAPACK.a lapack.o
+ranlib libsiestaLAPACK.a
+make[1]: Leaving directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/Libs'
+==> Compiling libsiestaBLAS.a in Libs...
+make[1]: Entering directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/Libs'
+gfortran -c -O2 -fPIC -ftree-vectorize  -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/Libs/blas.F 
+ar  cru libsiestaBLAS.a blas.o
+ranlib libsiestaBLAS.a
+make[1]: Leaving directory '/home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Obj-testing/Libs'
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/precision.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/parallel.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_cml.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/sys.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_io.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/alloc.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/interpolation.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xml.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/radial.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atm_types.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/spher_harm.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atmfuncs.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/units.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/automatic_cell.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atom_options.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/arw.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/mneighb.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/onmod.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/spatial.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atomlwf.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atmparams.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pseudopotential.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/basis_types.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/chemical.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/periodic_table.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/basis_specs.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/bsc_xcmod.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/bessph.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_fft_gpfa.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/radfft.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/sorting.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_filter.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/old_atmfuncs.f
+gfortran -c -g -O1       -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atom.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_cite.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ldau_specs.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_geom.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atomlist.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/densematrix.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/files.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/get_kpoints_scale.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gamma.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_spin.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/printmatrix.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/schecomm.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Geometry.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Data2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_OrbitalDistribution.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Sparsity.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_SpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Pair_Geometry_SpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Fstack_Pair_Geometry_SpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Data1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_SpData1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/sparse_matrices.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/domain_decom.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/parallelsubs.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cellsubs.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/minvec.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/find_kgrid.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_options.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/kpoint_grid.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/writewave.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/bands.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/basis_enthalpy.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/bonds.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ksvinit.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ksv.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_mpi_utils.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/born_charge.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cellxc_mod.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/globalise.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/denmat.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ener3.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/gradient.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/on_subs.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/egandd.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cgwf.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/chkdim.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/chkgmx.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/chempot.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/coceri.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/coxmol.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cross.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/compute_norm.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/denmatlomem.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/linpack.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/detover.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/listsc.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/mesh.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_dscfcomm.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/meshphi.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/meshdscf.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dfscf.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_diagon_opt.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/memoryinfo.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_memory.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagon.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/digcel.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fft1d.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_walltime.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/moreParallelSubs.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_timer.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fft.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_planewavematrixvar.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/delk.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ntm.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/doping_uniform.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/moremeshsubs.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/forhar.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iogrid_netcdf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/intrinsic_missing.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_geom_aux.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_geom_box.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_geom_coord.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_geom_plane.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_geom_square.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_geom_objects.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_mesh_node.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_charge_add.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_efield.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_hartree_add.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_iorho.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_io_s.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ncdf_io.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_energies.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_forces.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_kinetic.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_stress.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/geom_helper.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/create_Sparsity_SC.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_os.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_iodm.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_sparse.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_io.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_handle_sparse.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_region.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_inf.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_io_ctype.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_cctype.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_chem_pot.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_iodm.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_electype.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_global_vars.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_tdir.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_kpoints.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Fstack_Data1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_mixing.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_mixing_scf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_interpolate.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fdf_extra.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_method.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_charge.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_17.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_18.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_19.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_20.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_22.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_24.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_26.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_28.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_fermi_30.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_gauss_quad.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_integrate.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_aux.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_io_contour.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_contour_eq.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_contour_neq.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_contour.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_hartree.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/create_Sparsity_Union.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_sparsity_handling.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_TriMat.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_debug.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_sparse.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_mumps_init.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_weight.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_options.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/timestamp.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ncdf_siesta.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_partial_charges.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Pair_Data1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Fstack_Pair_Data1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_svd.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_diis.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_rhog.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_voltage.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/meshsubs.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/parsing.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rhofft.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rhoofd.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/vmat.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dhscf.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/constr.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/errorf.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fermid.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iowfs_netcdf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagk_file.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/elpa1.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/elpa2.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rdiag_elpa.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rdiag_mrrr.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagg.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagk.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagkp.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diag2g.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diag2k.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diag3g.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diag3k.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagpol.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagsprl.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dipole.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dismin.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dnaefs.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dot.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ener3lomem.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/extrapolon.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_fixed.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/gradientlomem.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/grdsam.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/hsparse.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/idiag.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/basis_io.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/electrostatic.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/initatom.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/inver.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iodm_netcdf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iodmhs_netcdf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iolwf.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_cell.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/zmatrix.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iozm.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ipack.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iopipes.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fsockets.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iosockets.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/kgrid.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/kgridinit.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_trialorbitalclass.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/matel_registry.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/new_matel.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/kinefsm.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_eo.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/local_DOS.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/madelung.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/memory.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/metaforce.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atom_graph.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_supercell.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/mulliken.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/naefs.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_steps.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/restructSpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_new_dm.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/normalize_dm.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ordern.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/outcell.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/outcoor.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdos.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdosg.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdosk.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdoskp.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/phirphi.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pixmol.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/plcharge.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/kpoint_pdos.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/projected_DOS.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/propor.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/randomg.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/reclat.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/redcel.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_master.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/reinit.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/reord.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_noccbands.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_digest_nnkp.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta2wannier90.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_orderbands.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/reordpsi.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rhoofdsp.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rhooda.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/savepsi.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/shaper.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/timer_tree.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/extrae_eventllist.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/extrae_module.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/timer.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/vmb.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/vmatsp.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/volcel.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cdiag.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rdiag.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/conjgr_old.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cgvc.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/conjgr.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cgvc_zmatrix.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_convergence.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iocg.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ioeig.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iofa.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iokp.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/iomd.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/typecell.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ofc.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/poison.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/readsp.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/md_out.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/write_md_record.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/proximity_check.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ioxv.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_pivot_methods.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_rmaxh.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_matio.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_test_io.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_pivot.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_char.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_pivot.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_tri_common.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_rgn2trimat.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_tri_init.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_iodm_old.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/overlap.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_iostruct.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/write_subs.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/state_init.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_broyddj_nocomm.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/broyden_optim.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cell_broyden_optim.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_fire.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cell_fire_optim.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dynamics.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fire_optim.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_dicts.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/flook_siesta.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_check_walltime.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_exp_coord.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_target_stress.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/zm_broyden_optim.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/zm_fire_optim.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_move.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/compute_max_diff.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ldau.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_dipol.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_hsx.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/molecularmechanics.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/setup_hamiltonian.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/compute_ebs_shift.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_dminim.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/f_ppexsi_interface.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Distribution.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_pexsi.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_redist_spmatrix.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_pexsi_driver.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_iterator.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_dm_update.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_elec_se.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_full_scat.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_pivot_array.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_mat_invert.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_electrode.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_gf.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_sparse_helper.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_fullg.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_fullk.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_mumps_scat.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_mumpsg.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_mumpsk.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_trimat_invert.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_trimat_invert.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_tri_scat.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_trig.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_ts_trik.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_transiesta.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_zminim.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/compute_dm.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/mixer.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_wallclock.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/scfconvergence_test.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/nlefsm.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/overfsm.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/spinorbit.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/final_H_f_stress.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/post_scf_work.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/remove_intramol_pressure.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/state_analysis.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/object_debug.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_uuid.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_cmlsubs.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/struct_init.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/ts_init.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_init.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/read_options.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_pexsi_dos.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_pexsi_local_dos.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_analysis.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_end.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/compute_energies.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/save_density_matrix.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/setup_H0.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta_forces.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/io.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/coor.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/atm_transfer.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/broadcast_basis.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/eggbox.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/dsyevds.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/zheevds.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/optical.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/phirphi_opt.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/reoptical.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/transition_rate.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/initparallel.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/show_distribution.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/setspatial.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/setatomnodes.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/uncell.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/cart2frac.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/obc.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_broyddj.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_broyden_mixing.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/get_target_stress.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_fire_para.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_fire_mixing.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/write_raw_efs.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdos2g.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdos2k.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdos3g.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pdos3k.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/moments.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/fsiesta_mpi.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/debugmpi.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/qsort.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/mmio.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pspltm1.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/lenstr.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/setup_ordern_indexes.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/read_xc_info.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/bsc_cellxc.F 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/xc.f
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/vacuum_level.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/write_orb_indx.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/elpa2_kernels.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/die.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/f2kcli.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_getopts.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/rusage.f90
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/memory_snapshot.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/memory_all.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/register_rfs.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/kpoint_convert.f90
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_planewavematrix.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/broadcast_projections.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/compute_pw_matrix.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_writedelk.F 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/mmn.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/amn.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_overkkneig.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/write_inp_wannier.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/diagonalizeHk.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/print_spin.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/extrapolateSpData2D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Pair_SpData1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/class_Fstack_Pair_SpData1D.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/m_monitor.F90 
+gfortran -c -O2 -fPIC -ftree-vectorize      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/nag.f
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT  /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/pxf.F90 
+gcc -c      /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/sockets.c 
+gfortran -c -O2 -fPIC -ftree-vectorize    -DFC_HAVE_ABORT   /home/ICN2/aakhtar/Softwares/siesta-4.1-b3/Src/siesta.F 
+gfortran -o siesta \
+        automatic_cell.o atom_options.o arw.o  atomlwf.o bands.o basis_enthalpy.o bessph.o bonds.o born_charge.o cellxc_mod.o cgwf.o chkdim.o chkgmx.o chempot.o coceri.o coxmol.o cross.o compute_norm.o denmat.o denmatlomem.o detover.o dfscf.o m_diagon_opt.o diagon.o digcel.o fft.o dhscf.o constr.o diagk_file.o diagg.o diagk.o diagkp.o diag2g.o diag2k.o diag3g.o diag3k.o diagpol.o diagsprl.o dipole.o dismin.o dnaefs.o doping_uniform.o dot.o m_efield.o egandd.o ener3.o ener3lomem.o errorf.o extrapolon.o m_fixed.o interpolation.o gradient.o gradientlomem.o grdsam.o hsparse.o idiag.o  initatom.o inver.o iodm_netcdf.o iodmhs_netcdf.o iogrid_netcdf.o iolwf.o iozm.o ipack.o iopipes.o iosockets.o iowfs_netcdf.o kgrid.o kgridinit.o kinefsm.o ksv.o ksvinit.o linpack.o local_DOS.o madelung.o mesh.o meshphi.o meshdscf.o memory.o meshsubs.o metaforce.o m_supercell.o mulliken.o minvec.o naefs.o m_new_dm.o normalize_dm.o ordern.o outcell.o outcoor.o m_fft_gpfa.o pdos.o pdosg.o pdosk.o pdoskp.o phirphi.o pixmol.o plcharge.o projected_DOS.o propor.o m_partial_charges.o randomg.o reclat.o redcel.o reinit.o reord.o reordpsi.o rhoofd.o rhoofdsp.o rhooda.o savepsi.o shaper.o timer_tree.o timer.o vmb.o vmat.o vmatsp.o volcel.o cdiag.o rdiag.o cgvc.o cgvc_zmatrix.o m_convergence.o iocg.o ioeig.o iofa.o iokp.o iomd.o kpoint_pdos.o typecell.o ofc.o poison.o readsp.o radfft.o write_md_record.o kpoint_grid.o find_kgrid.o proximity_check.o state_init.o siesta_move.o setup_hamiltonian.o compute_dm.o mixer.o scfconvergence_test.o post_scf_work.o state_analysis.o write_subs.o siesta_init.o struct_init.o siesta_options.o read_options.o siesta_geom.o siesta_analysis.o siesta_end.o siesta_forces.o io.o sparse_matrices.o coor.o atm_transfer.o broadcast_basis.o eggbox.o dsyevds.o zheevds.o optical.o phirphi_opt.o reoptical.o transition_rate.o initparallel.o show_distribution.o setspatial.o setatomnodes.o uncell.o cart2frac.o obc.o precision.o sys.o m_cell.o files.o spatial.o parallel.o parallelsubs.o  parsing.o chemical.o atom.o atmparams.o m_mpi_utils.o fdf_extra.o m_iorho.o atmfuncs.o listsc.o memoryinfo.o m_memory.o sorting.o atomlist.o atm_types.o old_atmfuncs.o radial.o alloc.o spher_harm.o periodic_table.o version.o timestamp.o basis_types.o xml.o pseudopotential.o basis_specs.o basis_io.o ldau.o ldau_specs.o onmod.o densematrix.o writewave.o on_subs.o fermid.o m_broyddj.o electrostatic.o mneighb.o globalise.o siesta_cmlsubs.o siesta_cml.o units.o zmatrix.o m_broyden_mixing.o forhar.o m_walltime.o m_wallclock.o m_iostruct.o nlefsm.o overfsm.o overlap.o conjgr.o conjgr_old.o m_energies.o m_steps.o m_broyddj_nocomm.o broyden_optim.o ioxv.o dynamics.o md_out.o molecularmechanics.o zm_broyden_optim.o cell_broyden_optim.o remove_intramol_pressure.o m_ntm.o m_dipol.o m_kinetic.o m_rmaxh.o m_forces.o m_stress.o m_eo.o m_spin.o m_gamma.o m_hsx.o m_fire.o setup_H0.o get_kpoints_scale.o get_target_stress.o fire_optim.o zm_fire_optim.o cell_fire_optim.o m_fire_para.o m_fire_mixing.o write_raw_efs.o pdos2g.o pdos2k.o pdos3g.o pdos3k.o spinorbit.o moments.o fsiesta_mpi.o final_H_f_stress.o debugmpi.o qsort.o save_density_matrix.o m_dscfcomm.o schecomm.o moremeshsubs.o domain_decom.o printmatrix.o mmio.o pspltm1.o lenstr.o setup_ordern_indexes.o m_iodm.o m_iodm_old.o m_filter.o m_io.o m_timer.o extrae_module.o extrae_eventllist.o moreParallelSubs.o read_xc_info.o siesta_master.o bsc_xcmod.o bsc_cellxc.o xc.o vacuum_level.o write_orb_indx.o rdiag_elpa.o elpa1.o elpa2.o elpa2_kernels.o rdiag_mrrr.o die.o m_pexsi.o m_pexsi_driver.o m_pexsi_dos.o m_pexsi_local_dos.o m_redist_spmatrix.o class_Distribution.o m_dminim.o m_zminim.o m_getopts.o f2kcli.o m_svd.o m_matio.o rusage.o memory_snapshot.o compute_ebs_shift.o memory_all.o matel_registry.o register_rfs.o new_matel.o kpoint_convert.o m_target_stress.o compute_max_diff.o m_mixing.o m_mixing_scf.o m_trialorbitalclass.o siesta2wannier90.o m_planewavematrixvar.o delk.o m_planewavematrix.o m_digest_nnkp.o broadcast_projections.o compute_pw_matrix.o m_writedelk.o mmn.o m_noccbands.o amn.o m_overkkneig.o write_inp_wannier.o diagonalizeHk.o m_orderbands.o m_check_walltime.o print_spin.o class_OrbitalDistribution.o class_Sparsity.o class_Data1D.o class_Data2D.o class_SpData1D.o class_SpData2D.o restructSpData2D.o extrapolateSpData2D.o class_Geometry.o class_Fstack_Data1D.o class_Pair_Data1D.o class_Fstack_Pair_Data1D.o class_Pair_Geometry_SpData2D.o class_Fstack_Pair_Geometry_SpData2D.o class_Pair_SpData1D.o class_Fstack_Pair_SpData1D.o class_TriMat.o m_trimat_invert.o m_uuid.o object_debug.o m_rhog.o rhofft.o m_diis.o compute_energies.o m_char.o m_os.o intrinsic_missing.o geom_helper.o m_sparse.o m_handle_sparse.o m_mesh_node.o create_Sparsity_SC.o create_Sparsity_Union.o m_gauss_quad.o m_gauss_fermi_inf.o m_gauss_fermi_30.o m_gauss_fermi_28.o m_gauss_fermi_26.o m_gauss_fermi_24.o m_gauss_fermi_22.o m_gauss_fermi_20.o m_gauss_fermi_19.o m_gauss_fermi_18.o m_gauss_fermi_17.o m_integrate.o m_interpolate.o m_mat_invert.o m_monitor.o m_iterator.o m_pivot_array.o m_pivot.o m_pivot_methods.o atom_graph.o m_geom_aux.o m_geom_objects.o m_geom_box.o m_geom_coord.o m_geom_square.o m_geom_plane.o m_charge_add.o m_hartree_add.o m_io_s.o m_region.o m_sparsity_handling.o m_ncdf_siesta.o m_ncdf_io.o m_exp_coord.o flook_siesta.o siesta_dicts.o m_cite.o m_ts_io.o nag.o pxf.o sockets.o fsockets.o  siesta.o libfdf.a libwxml.a libxmlparser.a \
+               libSiestaXC.a  \
+               libsiestaLAPACK.a libsiestaBLAS.a  
