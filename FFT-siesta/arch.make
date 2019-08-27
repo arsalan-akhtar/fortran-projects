@@ -22,7 +22,7 @@ FPP = $(FC) -E -P -x c
 FC = gfortran
 FC_SERIAL = gfortran
 
-FFLAGS = -O2 -fPIC -ftree-vectorize
+FFLAGS = -O2 -fPIC -ftree-vectorize -Wall -fcheck=all -g -fbacktrace
 
 AR = ar
 RANLIB = ranlib

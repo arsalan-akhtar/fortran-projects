@@ -6,20 +6,16 @@
 Program Defect
 !-----------------------------------------------------------------------
 !For FFT
-!     Modules
- !subroutine test()
+!Modules
+!-----------------------------------------------------------------------
  use precision,   only : dp, grid_p
  use parallel,    only : Node, Nodes, ProcessorY
  use sys,         only : die
- !use alloc,       only : re_alloc, de_alloc
- !use m_fft,       only : fft     ! 3-D fast Fourier transform
- !use cellsubs,    only : reclat  ! Finds reciprocal lattice vectors
- use cellsubs,    only : volcel  ! Finds unit cell volume
-!-----------------------------------------------------------------------
-      
-
-
-
+ use alloc,       only : re_alloc, de_alloc
+ use m_fft,       only : fft     ! 3-D fast Fourier transform
+ use cellsubs,    only : reclat  ! Finds reciprocal lattice vectors
+ use cellsubs,    only : volcel  ! Finds unit cell volume  
+ use mesh,         only : nsm
 !-----------------------------------------------------------------------
 !use iorho
 implicit none
@@ -33,6 +29,15 @@ logical                          ::  found_sub,check
 real,parameter                   ::  bohr_to_ang=0.529177
 !-----------------------------------------------------------------------
 real(dp)        :: VOLUME   
+!-----------------------------------------------------------------------
+!FOR FFT
+integer                          :: n1,n2,n3,ic
+real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub_kind !(kind=8)
+real(grid_p), pointer :: CG(:,:)
+!integer               ::      nsm
+
+
+
 !-----------------------------------------------------------------------
 
 !write(*,*) "Please Enter the File Name: "   
@@ -70,15 +75,78 @@ allocate(f_sub(maxp_sub,nspin_sub))
 call iorho(task_sub,fname_sub,cell_sub,mesh_sub,nsm_sub,maxp_sub,nspin_sub,f_sub,found_sub)!
 
 101 format ("For spin=",2 (5X,I10),E25.10)
+write(*,*) "4 kind"
 do i_s=1,nspin_sub 
     do i_x=1,maxp_sub 
-        !write(*,101) i_s,i_x, f_sub(i_x,i_s)
+!        write(*,101) i_s,i_x, f_sub(i_x,i_s)
     end do
 end do
 !-----------------------------------------------------------------------
 !Taking FFT
+!-----------------------------------------------------------------------
+!allocate(f_sub_kind(maxp_sub,nspin_sub))
+!call iorho(task_sub,fname_sub,cell_sub,mesh_sub,nsm_sub,maxp_sub,nspin_sub,f_sub_kind,found_sub)!
 VOLUME = VOLCEL( cell_sub )
-write(*,*)"The Volume is :",VOLUME
+write(*,*)"The Volume is  :",VOLUME ," A^3"
+write(*,*) "============================================"
+!allocate(f_sub_kind(maxp_sub,nspin_sub))
+!f_sub_kind(:,:)=f_sub(:,:)
+nullify( CG )
+!call re_alloc( CG, 1, 2, 1, mesh_sub(1)*mesh_sub(2)*mesh_sub(3))
+call re_alloc( CG, 1, 2, 1, 80*80*80)
+!C     Copy density to complex array
+!!$OMP parallel do default(shared), private(I)
+write(*,*) "REAL"
+do ic=1,maxp_sub
+   !CG(1,ic) = f_sub_kind(ic,1)
+   CG(1,ic) = f_sub(ic,1)
+   write(*,*)ic,f_sub(ic,1)    
+   CG(2,ic) = 0.0_grid_p
+end do
+nsm=nsm_sub
+!!$OMP end parallel do
+call fft( CG, mesh_sub, -1 )
+
+write(*,*) "FT"
+do ic=1,maxp_sub
+!    write(*,*) ic,CG(1,ic)
+end do
+write(*,*) "BFT"
+call fft( CG, mesh_sub, +1 )
+do ic=1,maxp_sub
+!    write(*,*) ic,CG(1,ic)
+end do
+
+!call fft(f_sub_kind,mesh_sub, -1 )
+!101 format ("For spin=",2 (5X,I10),E25.10)
+!write(*,*) "4 kind"
+!do i_s=1,nspin_sub 
+!    do i_x=1,maxp_sub 
+!        write(*,101) i_s,i_x, f_sub_kind(i_x,i_s)
+!    end do
+!end do
+
+!call de_alloc(f_sub_kind )
+
+call de_alloc(CG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 !allocate(f_normal_sub(mesh_sub(1),mesh_sub(2),mesh_sub(3),nspin_sub))
 
@@ -109,6 +177,7 @@ write(*,*)"The Volume is :",VOLUME
 
 
 deallocate(f_sub)
+!deallocate(f_sub_kind)
 !deallocate(f_normal_sub)
 !end subroutine test
 End Program Defect

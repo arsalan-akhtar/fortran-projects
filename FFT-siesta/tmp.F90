@@ -32,7 +32,7 @@ character(len=*), parameter :: version_str =  &
 character(len=*), parameter :: siesta_arch= &
 "unknown"
 character(len=*), parameter :: fflags= &
-"gfortran -O2 -fPIC -ftree-vectorize"
+"gfortran -O2 -fPIC -ftree-vectorize -Wall -fcheck=all -g -fbacktrace"
 character(len=*), parameter :: fppflags= &
 "-DFC_HAVE_ABORT"
 character(len=*), parameter :: libs= &
