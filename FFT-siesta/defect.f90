@@ -23,29 +23,27 @@ character(20)                    ::  fname_sub, task_sub
 integer                          ::  maxp_sub, mesh_sub(3), nspin_sub, nsm_sub,i_x,i_s
 real ,allocatable,dimension(:,:)  ::  f_sub !(kind=8)
 real ,allocatable,dimension(:,:,:,:)  ::  f_normal_sub
-integer                          ::  i2,i3,ip,is,ind,inner_counter,outer_counter
+integer                          ::  i2,i3,ip,is,ind,inner_counter,outer_counter,iv
 double precision                 ::  cell_sub(3,3)!,dcell_sub(3,3)
 logical                          ::  found_sub,check
 real,parameter                   ::  bohr_to_ang=0.529177
 !-----------------------------------------------------------------------
-real(dp)        :: VOLUME   
+real(dp)                :: VOLUME,rcell_sub_md(3)   
+double precision        :: rcell_sub(3,3)
 !-----------------------------------------------------------------------
 !FOR FFT
 integer                          :: n1,n2,n3,ic
 real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub_kind !(kind=8)
 real(grid_p), pointer :: CG(:,:)
 !integer               ::      nsm
-
-
-
 !-----------------------------------------------------------------------
-
+real ::q_model,ev_to_k
+!-----------------------------------------------------------------------
 !write(*,*) "Please Enter the File Name: "   
 !read(*,*)  fname_sub  
 fname_sub='ZrO2-G.VT'
 task_sub='read'
 nsm_sub=1
-!=.TRUE.
 call iorho(task_sub,fname_sub,cell_sub,mesh_sub,nsm_sub,maxp_sub,nspin_sub,f_sub,found_sub)!
 
 if ( found_sub ) then
@@ -100,7 +98,7 @@ write(*,*) "REAL"
 do ic=1,maxp_sub
    !CG(1,ic) = f_sub_kind(ic,1)
    CG(1,ic) = f_sub(ic,1)
-   write(*,*)ic,f_sub(ic,1)    
+!   write(*,*)ic,f_sub(ic,1)    
    CG(2,ic) = 0.0_grid_p
 end do
 nsm=nsm_sub
@@ -116,7 +114,6 @@ call fft( CG, mesh_sub, +1 )
 do ic=1,maxp_sub
 !    write(*,*) ic,CG(1,ic)
 end do
-
 !call fft(f_sub_kind,mesh_sub, -1 )
 !101 format ("For spin=",2 (5X,I10),E25.10)
 !write(*,*) "4 kind"
@@ -130,11 +127,27 @@ end do
 
 call de_alloc(CG)
 
+!-----------------------------------------------------------------------
+!Calculating E_lat
+!-----------------------------------------------------------------------
+write (*,*)"Charge", q_model(0.0,1.0,1.0,1.0)
+call reclat( cell_sub,rcell_sub,1 )
 
 
+write(*,*) ,"The R VECTOR is  :",rcell_sub(1,1),rcell_sub(1,2),rcell_sub(1,3)        
+write(*,*) ,"The R VECTOR is  :",rcell_sub(2,1),rcell_sub(2,2),rcell_sub(2,3)         
+write(*,*) ,"The R VECTOR is  :",rcell_sub(3,1),rcell_sub(3,2),rcell_sub(3,3)          
+!write(*,*) "============================================"
+!VOLUME = VOLCEL( cell_sub )
+!write(*,*)"The Volume is  :",VOLUME ," A^3"
 
-
-
+!Finding norm (modules) of Reciprocal Cell-vector 
+ do iv = 1,3
+   rcell_sub_md(iv) = dot_product(rcell_sub(:,iv),rcell_sub(:,iv))
+   rcell_sub_md(iv) = sqrt(rcell_sub_md(iv))
+ enddo
+ write(*,*),"The parameter R Vector: ",rcell_sub_md(1),rcell_sub_md(2),rcell_sub_md(3)    
+write(*,*),"Cut k :", ev_to_k(500.0)
 
 
 
@@ -296,3 +309,33 @@ subroutine iorho( task, fname, cell, mesh, nsm, maxp, nspin, f, found )!
 !        1 |  1  |  80 | ..  ...  ..
 
 
+!-----------------------------------------------------------------------
+!Q MODEL Functions
+!-----------------------------------------------------------------------
+real Function q_model(x,gamma2,beta2,g2)
+!    "Gaussian Model in PyCDT"
+!    "q(r)=q[x exp(-r/gamma) +(1-x) exp(-r^2/beta^2)]"
+!    "q(g2)=x/sqrt(1+gamma^2*g2)+*(1-x)*exp^(-beta2*g2) "
+!     INPUT          x: Weight
+!               gamma2: Exponential Decay Constant
+!                beta2: Gaussian Decay    
+!                   g2: square of reciprocal Vector  
+!    OUTPUT    q_model: Charge densitu at reciprocal magnitude 
+     implicit none
+     real :: gamma2,beta2,x,g2 
+     q_model=x/sqrt(1+beta2*g2)+(1-x)*exp(-0.25*beta2*g2)
+end Function q_model 
+!-----------------------------------------------------------------------
+!eV to k  Functions
+!-----------------------------------------------------------------------
+real Function ev_to_k(eV)
+!    Convert energy to reciprocal vector magnitude k via hbar*k^2/2m
+!    Args:
+!        a: Energy in eV.
+!
+!    Returns:   Reciprocal vector magnitude (units of 1/Bohr).
+     implicit none
+     real, parameter :: ang_to_bohr=1.889726878
+     real :: eV
+     ev_to_k=sqrt(eV/3.80986)*ang_to_bohr   
+end Function
