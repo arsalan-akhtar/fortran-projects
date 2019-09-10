@@ -1,12 +1,11 @@
 !=======================================================================
 ! 21 August Adding FFT
 !=======================================================================
-
+!VO Position  = (0.25,0.25,0.25) 
 
 Program Defect
 !-----------------------------------------------------------------------
-!For FFT
-!Modules
+! Loading Modules
 !-----------------------------------------------------------------------
  use precision,   only : dp, grid_p
  use parallel,    only : Node, Nodes, ProcessorY
@@ -18,39 +17,68 @@ Program Defect
  use mesh,         only : nsm
  use units,       only:pi
 !-----------------------------------------------------------------------
-!FOR iorho
 implicit none
-character(20)                       ::  fname_sub_neutral,task_sub_neutral
-character(20)                       ::  fname_sub_charge ,task_sub_charge
-integer                             ::  maxp_sub_neutral, mesh_sub_neutral(3)&
-&, nspin_sub_neutral, nsm_sub_neutral
-integer                             ::  maxp_sub_charge , mesh_sub_charge(3)&
-&, nspin_sub_charge,nsm_sub_charge
-real,allocatable,dimension(:,:)     ::  f_sub_neutral 
-real,allocatable,dimension(:,:)     ::  f_sub_charge 
-integer                             ::  i_x,i_s,i2,i3,ip,is,ind,iv 
-double precision                    ::  cell_sub_neutral(3,3)!,dcell_sub(3,3)
-double precision                    ::  cell_sub_charge(3,3)!,dcell_sub(3,3)
-logical                             ::  found_sub_neutral,found_sub_charge,check
-real(kind=8),parameter              ::  bohr_to_ang=0.529177
 !-----------------------------------------------------------------------
-real(dp)                :: VOLUME,rcell_sub_neutral_md(3),rcell_sub_charge_md(3),epsi
+! Declaration of iorho Neutral Reading
+!-----------------------------------------------------------------------
+character(20)  ::  fname_sub_neutral,task_sub_neutral
+integer        ::  maxp_sub_neutral,mesh_sub_neutral(3)&
+&,nspin_sub_neutral, nsm_sub_neutral
+real,allocatable,dimension(:,:)   ::  f_sub_neutral,f_sub_charge 
+double precision                  ::  cell_sub_neutral(3,3)
+logical                           ::  found_sub_neutral
+real(dp)       :: volume_neutral,rcell_sub_neutral_md(3)
+!-----------------------------------------------------------------------
+!Declaration of iorho Charge Reading
+!-----------------------------------------------------------------------
+character(20)  ::  fname_sub_charge ,task_sub_charge
+integer        ::  maxp_sub_charge , mesh_sub_charge(3)&
+&, nspin_sub_charge,nsm_sub_charge
+double precision  ::  cell_sub_charge(3,3)
+logical           ::  found_sub_charge,check
+real(dp)          :: volume_charge,rcell_sub_charge_md(3)
+!-----------------------------------------------------------------------
+!Declaration For Iterations
+!-----------------------------------------------------------------------
+integer  ::  iv,ns,n1,n2,n3,ic
+
+!-----------------------------------------------------------------------
+!Declaration Of Parameters
+!-----------------------------------------------------------------------
+real(kind=8),parameter              ::  bohr_to_ang=0.529177
+real(kind=8), parameter :: ang_to_bohr=1.889726878
+!-----------------------------------------------------------------------
 real(kind=8)            :: E_lat,g2,ecut,E_lat_z,deltag,deltax,gn2 
-double precision        :: rcell_sub_charge(3,3),rcell_sub_neutral(3,3)
+double precision        :: rcell_sub_charge(3,3),rcell_sub_neutral(3,3)!,r(3)
 integer                 :: q_x,q_y,q_z,numpoint,h,ign
-real(kind=8)          :: gamma2,beta2,x
+
+!-----------------------------------------------------------------------
+!Declaration For E_lattice
+!-----------------------------------------------------------------------
+real(kind=4)            :: epsi
+!-----------------------------------------------------------------------
+!Declaration For V_lr
+!-----------------------------------------------------------------------
+real(kind=4),allocatable,dimension(:,:)     ::  V_lr 
+!real(grid_p), pointer                       :: V_lr(:,:)
 !-----------------------------------------------------------------------
 !FOR FFT
 !-----------------------------------------------------------------------
-integer                          :: n1,n2,n3,ic
-real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub_kind_neutral !(kind=8)
+real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub_kind_neutral
 real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub_kind_charge
 real(grid_p), pointer :: CG_neutral(:,:)
 real(grid_p), pointer :: CG_charge(:,:)
 !integer               ::      nsm
 !-----------------------------------------------------------------------
-real(kind=8) ::q_model,ev_to_k
+!Declaration For Functions
 !-----------------------------------------------------------------------
+real(kind=8)   ::ev_to_k,q_model
+real(kind=4)   :: q_model_r,r_norm,gamma_d,beta_d,x_d
+real(kind=8)   :: gamma2,beta2,x
+integer(kind=8) :: Vl_d,i_x,i_s,i2,i3,ip,is,ind,counter,r_0(3),r_x,r_y,r_z
+!=======================================================================
+! INPUTS & User Defined Values
+!=======================================================================
 !write(*,*) "Please Enter the File Name: "   
 !read(*,*)  fname_sub  
 !fname_sub_neutral='ZrO2-G.VT'
@@ -62,18 +90,26 @@ nsm_sub_neutral=1
 nsm_sub_charge=1
 ecut=ev_to_k(2400.0_dp)
 epsi=20.0
-x=0.0_dp
-gamma2=1.0_dp
-beta2=1.0_dp
+x_d=0.0
+gamma_d=1.0
+beta_d=1.0*ang_to_bohr
+r_0(1)=1
+r_0(2)=1
+r_0(3)=1
+ns=1
 !=======================================================================
+!-----------------------------------------------------------------------
 !READING Neutral VT
+!-----------------------------------------------------------------------
 call iorho(task_sub_neutral,fname_sub_neutral,cell_sub_neutral,&
 & mesh_sub_neutral,nsm_sub_neutral,maxp_sub_neutral,nspin_sub_neutral,f_sub_neutral,found_sub_neutral)
-!call iorho(task_sub,fname_sub_neutral,cell_sub,mesh_sub,nsm_sub,maxp_sub,nspin_sub,f_sub,found_sub)!
+!-----------------------------------------------------------------------
 !READING Charged VT
 call iorho(task_sub_charge,fname_sub_charge,cell_sub_charge,&
 & mesh_sub_charge,nsm_sub_charge,maxp_sub_charge,nspin_sub_charge,f_sub_charge,found_sub_charge)
+!-----------------------------------------------------------------------
 ! CHECKING FILE EXIST OR NOT
+!-----------------------------------------------------------------------
 if ( found_sub_neutral ) then
     write (*,*) "Neutral Potential Founded",found_sub_neutral
     else
@@ -86,12 +122,12 @@ else
     write (*,*) "ERROR Couldn't read Charge Potential File'"
     STOP
 endif
-
 write (*,*) "mode of (Neutral) :" , task_sub_neutral
 write (*,*) "mode of (Charge) :" , task_sub_neutral
-
-100 format (3(F10.5,5X))
+!-----------------------------------------------------------------------
 ! Neutral READING INFO
+100 format (3(F10.5,5X))
+!-----------------------------------------------------------------------
 write(*,*) "============================================================"
 write(*,*) "                      NEUTRAL INFO"
 write(*,*) "============================================================"
@@ -103,7 +139,9 @@ write (*,*) "the number of spins (nspin_sub) :" , nspin_sub_neutral
 write (*,*) "the nubmer of mesh point (mesh_sub):" , mesh_sub_neutral
 write (*,*) "the number of sub mesh point (nsm) :" , nsm_sub_neutral
 write (*,*) "the number of maximum mesh point (maxp) :" , maxp_sub_neutral
+!-----------------------------------------------------------------------
 ! Charge READING INFO
+!-----------------------------------------------------------------------
 write(*,*) "============================================================"
 write(*,*) "                      CHARGE INFO"
 write(*,*) "============================================================"
@@ -116,7 +154,8 @@ write (*,*) "the nubmer of mesh point (mesh_sub):" , mesh_sub_charge
 write (*,*) "the number of sub mesh point (nsm) :" , nsm_sub_charge
 write (*,*) "the number of maximum mesh point (maxp) :" , maxp_sub_charge
 !-----------------------------------------------------------------------
-
+! Allocating For V_neutral,V_charge
+!-----------------------------------------------------------------------
 allocate(f_sub_neutral(maxp_sub_neutral,nspin_sub_neutral))
 allocate(f_sub_charge(maxp_sub_charge,nspin_sub_charge))
 call iorho(task_sub_neutral,fname_sub_neutral,cell_sub_neutral,mesh_sub_neutral&
@@ -158,7 +197,7 @@ write(*,*) "Neutral: REAL MESH of "
 do ic=1,maxp_sub_neutral
    CG_neutral(1,ic) = f_sub_kind_neutral(ic,1)
    CG_neutral(1,ic) = f_sub_neutral(ic,1)
-   write(*,*)ic,f_sub_neutral(ic,1)    
+!   write(*,*)ic,f_sub_neutral(ic,1)    
    CG_neutral(2,ic) = 0.0_grid_p
 end do
 nsm=nsm_sub_neutral
@@ -167,7 +206,7 @@ call fft( CG_neutral, mesh_sub_neutral, -1 )
 
 write(*,*) "FT"
 do ic=1,maxp_sub_neutral
-    write(*,*) ic,CG_neutral(1,ic)
+!    write(*,*) ic,CG_neutral(1,ic)
 end do
 !write(*,*) "BFT"
 !call fft( CG, mesh_sub, +1 )
@@ -198,7 +237,7 @@ write(*,*) "Charge: REAL MESH of "
 do ic=1,maxp_sub_charge
    CG_charge(1,ic) = f_sub_kind_charge(ic,1)
    CG_charge(1,ic) = f_sub_charge(ic,1)
-   write(*,*)ic,f_sub_charge(ic,1)    
+!   write(*,*)ic,f_sub_charge(ic,1)    
    CG_charge(2,ic) = 0.0_grid_p
 end do
 nsm=nsm_sub_charge
@@ -207,35 +246,68 @@ call fft( CG_neutral, mesh_sub_neutral, -1 )
 
 write(*,*) "FT"
 do ic=1,maxp_sub_neutral
-    write(*,*) ic,CG_neutral(1,ic)
+!    write(*,*) ic,CG_neutral(1,ic)
 end do
+write(*,*) "============================================================"
+deallocate(f_sub_kind_charge)
 !-----------------------------------------------------------------------
 !Calculating V^{lr}
 !-----------------------------------------------------------------------
-
-
+write(*,*) "Calculating V^{lr}"
+!call de_alloc(V_lr)
+!Vl_d=(1600)!maxp_sub_charge!(160*160*160*160)
+!deallocate(V_lr)
+write(*,*) maxp_sub_neutral,nspin_sub_charge ! For testing *************
+allocate(V_lr(maxp_sub_neutral,nspin_sub_charge))
+!nullify( V_lr )
+!call re_alloc( V_lr, 1, 2, 1, mesh_sub_charge(1)*mesh_sub_charge(2)*mesh_sub_charge(3))
+!call re_alloc( V_lr, 1, 2, 1, 160*160*160*160)
+!deallocate(V_lr)
+!V_lr_d=160*160*160
+!allocate(V_lr(4096000,2)) Worked!!!!!!!!
+counter=1
+do is = 1,nspin_sub_charge
+     ind = 0
+     do i3 = 1,mesh_sub_charge(3)
+          do i2 = 1,mesh_sub_charge(2)
+               do ip=1,mesh_sub_charge(1)
+                    r_x=abs(ip-r_0(1))
+                    r_y=abs(i2-r_0(2))
+                    r_z=abs(i3-r_0(3))
+                    !r_norm = (r_x**2+r_y**2+r_z**2)**(1.0/2.0)
+                    r_norm = (r_x+r_y+r_z)
+                    !V_lr(ind+ip,is)=0.0  ! For testing *************
+                    V_lr(ind+ip,is)= (1/epsi)*q_model_r(x_d,gamma_d,beta_d,ip,i2,i3,r_0)/r_norm
+                    
+                    write (*,*) ind+ip,ip,i2,i3,is, V_lr(ind+ip,is)
+                    counter=counter+1
+               end do
+               ind = ind + mesh_sub_charge(1)
+          end do
+     end do    
+end do
+!deallocate(V_lr)
+!call de_alloc(V_lr)
 !-----------------------------------------------------------------------
-!Calculating E_lat
+!Calculating G Vector
 !-----------------------------------------------------------------------
 !write (*,*)"Charge", q_model(0.0_dp,1.0_dp,1.0_dp,1.0_dp)
 call reclat( cell_sub_neutral,rcell_sub_neutral,1 )
-
-
-write(*,*) ,"The G VECTOR is  :",rcell_sub_neutral(1,1),rcell_sub_neutral(1,2),rcell_sub_neutral(1,3)        
-write(*,*) ,"The G VECTOR is  :",rcell_sub_neutral(2,1),rcell_sub_neutral(2,2),rcell_sub_neutral(2,3)         
-write(*,*) ,"The G VECTOR is  :",rcell_sub_neutral(3,1),rcell_sub_neutral(3,2),rcell_sub_neutral(3,3)          
-!write(*,*) "============================================"
-VOLUME = VOLCEL( cell_sub_neutral )
-write(*,*)"The Volume is  :",VOLUME ," A^3"
+write(*,*) "The G VECTOR is  :",rcell_sub_neutral(1,1),rcell_sub_neutral(1,2),rcell_sub_neutral(1,3)        
+write(*,*) "The G VECTOR is  :",rcell_sub_neutral(2,1),rcell_sub_neutral(2,2),rcell_sub_neutral(2,3)         
+write(*,*) "The G VECTOR is  :",rcell_sub_neutral(3,1),rcell_sub_neutral(3,2),rcell_sub_neutral(3,3)          
+volume_neutral = VOLCEL( cell_sub_neutral )
+write(*,*)"The Volume is  :",volume_neutral ," A^3"
+!-----------------------------------------------------------------------
 !Finding norm (modules) of Reciprocal Cell-vector 
+!-----------------------------------------------------------------------
  do iv = 1,3
    rcell_sub_neutral_md(iv) = dot_product(rcell_sub_neutral(:,iv),rcell_sub_neutral(:,iv))
    rcell_sub_neutral_md(iv) = sqrt(rcell_sub_neutral_md(iv))
  enddo
-write(*,*),"The parameter G Vector: ",rcell_sub_neutral_md(1),rcell_sub_neutral_md(2),rcell_sub_neutral_md(3)
+write(*,*) "The parameter G Vector: ",rcell_sub_neutral_md(1),rcell_sub_neutral_md(2),rcell_sub_neutral_md(3)
 !write(*,*),"The Norm of G Vector: ", sqrt(rcell_sub_md(1)**2+rcell_sub_md(2)**2+rcell_sub_md(3)**2)    
-write(*,*),"The Norm of G Vector: ",rcell_sub_neutral_md(1),rcell_sub_neutral_md(2),rcell_sub_neutral_md(3)
-write(*,*),"ECut k :", ecut!ev_to_k(500.0)
+write(*,*) "ECut k :", ecut
 !200 format (4(A3,10X))
 !write(*,*),"             G2             G_x                  G_y                  G_z "
 !Finding norm (modules) of G-vectors within cutoff 
@@ -251,7 +323,9 @@ do q_x=1,int(ecut)
           enddo
      enddo
 end do
+!-----------------------------------------------------------------------
 !Calculating E_lat
+!-----------------------------------------------------------------------
 E_lat=0.0
 E_lat_z=0.0
 deltag=0.0
@@ -277,10 +351,7 @@ do ign=0,numpoint
      deltag=ign+deltag
 !     write(*,*) ign,(E_lat_z*(1/pi*(epsi)))
 enddo
-write(*,*),"TOTAL E_Lattice", ((E_lat*((2*pi)/(epsi*VOLUME )))-(E_lat_z*(1/pi*(epsi))))
-
-
-
+write(*,*) "TOTAL E_Lattice", ((E_lat*((2*pi)/(epsi*volume_neutral )))-(E_lat_z*(1/pi*(epsi))))
 !                    E_lat_z= E_lat_z + deltag*(q_model(x,gamma2,beta2,g2)**2)              
 !                    deltag=g2-deltag
 !,(E_lat_z*(1/pi*(epsi)))
@@ -296,8 +367,9 @@ write(*,*),"TOTAL E_Lattice", ((E_lat*((2*pi)/(epsi*VOLUME )))-(E_lat_z*(1/pi*(e
 
 deallocate(f_sub_neutral)
 deallocate(f_sub_charge)
-deallocate(f_sub_kind_neutral)
-deallocate(f_sub_kind_charge)
+!deallocate(f_sub_kind_neutral)
+!deallocate(f_sub_kind_charge)
+deallocate(V_lr)
 !end subroutine test
 End Program Defect
 
@@ -347,7 +419,7 @@ subroutine iorho( task, fname, cell, mesh, nsm, maxp, nspin, f, found )!
 ! Arguments
       character*(*)     fname, task
       integer           maxp, mesh(3), nspin, nsm
-      real             f(maxp,nspin)
+      real              f(maxp,nspin)
       double precision  cell(3,3)
       logical           found
 ! Internal variables and arrays
@@ -417,7 +489,7 @@ subroutine iorho( task, fname, cell, mesh, nsm, maxp, nspin, f, found )!
 
 
 !-----------------------------------------------------------------------
-!Q MODEL Functions
+!Q MODEL(g2) Functions
 !-----------------------------------------------------------------------
 real(kind=8) Function q_model(x,gamma2,beta2,g2)
 !     use precision,   only : dp, grid_p
@@ -434,6 +506,36 @@ real(kind=8) Function q_model(x,gamma2,beta2,g2)
      real(kind=8)       :: g2 
      q_model=x/sqrt(1+beta2*g2)+(1-x)*exp(-0.25*beta2*g2)
 end Function q_model 
+!-----------------------------------------------------------------------
+!Q MODEL(r-r_0) Functions
+!-----------------------------------------------------------------------
+real(kind=4) Function q_model_r(x,gamma_d,beta_d,r1,r2,r3,r_0)
+     use units,   only : pi
+!    "Gaussian Model in PyCDT"
+!    "q(r)=q[x exp(-r/gamma) +(1-x) exp(-r^2/beta^2)]"
+!    "q(g2)=x/sqrt(1+gamma^2*g2)+*(1-x)*exp^(-beta2*g2) "
+!     INPUT          x: Weight
+!               gamma_d: Exponential Decay Constant
+!                beta_d: Gaussian Decay    
+!                   r: real Vector  
+!                   r_0: center of defect real Vector  
+!    OUTPUT    q_model: Charge density at real magnitude 
+     implicit none
+     real(kind=4)          :: gamma_d,beta_d,x,N_gamma,N_beta
+     real(kind=4)          :: a,b,c
+     integer(kind=8)              :: r_0(3),r1,r2,r3  
+     N_gamma=8*pi*gamma_d**3
+     N_beta=pi**(3.0/2.0)*beta_d**3
+     a=abs(r1-r_0(1))
+     b=abs(r2-r_0(2))
+     c=abs(r3-r_0(3))
+     q_model_r=x*N_gamma**(-1)*exp((-1)*sqrt(a**2+b**2+c**2)/beta_d)+&
+&     (1-x)*N_beta**(-1)*exp((-1)*(sqrt(a**2+b**2+c**2))**2/beta_d**2)
+     !q_model_r=(exp((-1)*a)**2)/beta_d**2
+end Function q_model_r
+
+
+
 !-----------------------------------------------------------------------
 !eV to k  Functions
 !-----------------------------------------------------------------------
