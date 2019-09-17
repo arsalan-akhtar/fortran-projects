@@ -45,8 +45,9 @@ integer  ::  iv,ns,n1,n2,n3,ic
 !-----------------------------------------------------------------------
 !Declaration Of Parameters
 !-----------------------------------------------------------------------
-real(kind=8),parameter              ::  bohr_to_ang=0.529177
+real(kind=8),parameter  :: bohr_to_ang=0.529177
 real(kind=8), parameter :: ang_to_bohr=1.889726878
+real(kind=8),parameter  :: ry_to_ev=13.6056980659
 !-----------------------------------------------------------------------
 real(kind=8)            :: E_q_lat,E_q_lat_z,ecut,deltax,gn2 
 double precision        :: rcell_sub_charge(3,3),rcell_sub_neutral(3,3)!,r(3)
@@ -57,7 +58,7 @@ integer                 :: q_x,q_y,q_z,numpoint,h,ign
 !-----------------------------------------------------------------------
 real(kind=4)            :: epsi
 integer                 :: charge
-real(kind=8)            :: E_r_lat
+real(kind=8)            :: E_r_lat,delta
 !-----------------------------------------------------------------------
 !Declaration For V_lr
 !-----------------------------------------------------------------------
@@ -70,13 +71,13 @@ real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub_kind_neutral
 real(kind=8) ,allocatable,dimension(:,:)  ::  f_sub_kind_charge
 real(grid_p), pointer :: CG_neutral(:,:)
 real(grid_p), pointer :: CG_charge(:,:)
-real(grid_p), pointer :: V_lr_p(:,:)
+real(grid_p), pointer :: V_lr_p(:,:),V_sr(:,:),deltaV(:,:)
 !integer               ::      nsm
 !-----------------------------------------------------------------------
 !Declaration For Functions
 !-----------------------------------------------------------------------
-real(kind=8)   :: ev_to_k,q_model
-real(kind=4)   :: q_model_r,r_norm,gamma_d,beta_d,x_d
+real(kind=8)   :: ev_to_k,q_model,d_position(3)
+real(kind=4)   :: q_model_r,r_norm,gamma_d,beta_d,x_d,n
 real(kind=8)   :: gamma2,beta2,x,deltag,g2
 integer(kind=8) :: Vl_d,i_x,i_s,i2,i3,ip,is,ind,counter,r_0(3),r_x,r_y,r_z
 !=======================================================================
@@ -91,15 +92,18 @@ task_sub_neutral='read'
 task_sub_charge='read'
 nsm_sub_neutral=1
 nsm_sub_charge=1
-ecut=ev_to_k(5000000.0_dp)
+ecut=ev_to_k(700000.0_dp)
 epsi=20.0
 x_d=0.0
 x=0.0
-gamma_d=1.0
-gamma2=1.0
-beta_d=2.0 !*(10**(-5))!*ang_to_bohr
-beta2=2.0!*(10**(-5))
-r_0(1)=1
+gamma_d=0.5!1.0
+gamma2=0.5!1.0
+beta_d=1.0 !*(10**(-5))!*ang_to_bohr
+beta2=1.0!*(10**(-5))
+d_position(1)=0.25
+d_position(2)=0.25
+d_position(3)=0.25
+r_0(1)=1  ! going to use internaly
 r_0(2)=1
 r_0(3)=1
 ns=1
@@ -166,7 +170,15 @@ write (*,*) "the number of sub mesh point (nsm) :" , nsm_sub_charge
 write (*,*) "the number of maximum mesh point (maxp) :" , maxp_sub_charge
 volume_charge = VOLCEL( cell_sub_charge )
 write(*,*)"The Volume is  :",volume_charge ," A^3"
-
+!-----------------------------------------------------------------------
+! Finding Location of Defect
+!-----------------------------------------------------------------------
+write(*,*) "============================================================"
+write(*,*) "                      Position of  Defect                   "
+write(*,*) "============================================================"
+write(*,*)int(mesh_sub_charge(1)*d_position(1))
+write(*,*)int(mesh_sub_charge(2)*d_position(2))
+write(*,*)int(mesh_sub_charge(3)*d_position(3))
 !-----------------------------------------------------------------------
 ! Allocating For V_neutral,V_charge
 !-----------------------------------------------------------------------
@@ -262,7 +274,7 @@ do ic=1,maxp_sub_neutral
 !    write(*,*) ic,CG_neutral(1,ic)
 end do
 write(*,*) "============================================================"
-deallocate(f_sub_kind_charge)
+!deallocate(f_sub_kind_charge)
 !-----------------------------------------------------------------------
 !Calculating V^{lr}
 !-----------------------------------------------------------------------
@@ -286,13 +298,17 @@ do is = 1,nspin_sub_charge
      do i3 = 1,mesh_sub_charge(3)
           do i2 = 1,mesh_sub_charge(2)
                do ip=1,mesh_sub_charge(1)
-!                    r_x=abs(ip-r_0(1))
-!                    r_y=abs(i2-r_0(2))
-!                    r_z=abs(i3-r_0(3))
-!                    r_norm = (r_x**2+r_y**2+r_z**2)**(1.0/2.0)
+                    r_x=abs(ip-r_0(1))
+                    r_y=abs(i2-r_0(2))
+                    r_z=abs(i3-r_0(3))
+                    r_norm = (r_x**2+r_y**2+r_z**2)**(1.0/2.0)
 !                    r_norm = (r_x+r_y+r_z)
                     !V_lr(ind+ip,is)=0.0  ! For testing *************
-                    V_lr(ind+ip,is)= (1/epsi)*q_model_r(charge,x_d,gamma_d,beta_d,ip,i2,i3,r_0)!/r_norm                    
+                    if ((i3 .EQ. r_0(3)) .AND. (i2.EQ.r_0(2)) .AND. (ip.EQ.r_0(1)))then
+                         V_lr(ind+ip,is)=0.0
+                    else 
+					V_lr(ind+ip,is)= (1/epsi)*q_model_r(charge,x_d,gamma_d,beta_d,ip,i2,i3,r_0)/r_norm
+                    endif                     
 !                    write (*,*) ind+ip,ip,i2,i3,is, V_lr(ind+ip,is)
                     counter=counter+1
                end do
@@ -436,7 +452,7 @@ do q_x=1,int(ecut)
      enddo
 end do
 !write(*,*) E_q_lat*((2*pi)/(epsi*volume_neutral))
-numpoint=500
+numpoint=1000
 deltag=ecut/numpoint
 write(*,*) "E_cut is ",ecut, "Delta g is",deltag
 do ign=0,numpoint
@@ -446,9 +462,9 @@ do ign=0,numpoint
 !     write(*,*) ign,deltag,(E_q_lat_z*(1/pi*(epsi)))
 enddo
 !write(*,*) "Total E_Lattice(g) =", ((E_q_lat*((2*pi)/(epsi*volume_neutral ))))
-write(*,*) "Total E_Lattice(g) with g=0 =", E_q_lat*((2*pi)/(epsi*volume_neutral))
+write(*,*) "Total E_Lattice(g) with g=0 =", E_q_lat*((2*pi)/(epsi*volume_neutral))!*ang_to_bohr**3
 write(*,*) "Total Removing g=0 with it self ",E_q_lat_z*(1.0/pi*(epsi))! *deltag
-write(*,*) "Total E_Lattice(g)-without g=0 =", E_q_lat*((2*pi)/(epsi*volume_neutral))- E_q_lat_z*(1/pi*(epsi))!*deltag
+write(*,*) "Total E_Lattice(g)-without g=0 =", (E_q_lat*((2*pi)/(epsi*volume_neutral))- E_q_lat_z*(1/pi*(epsi)))*ry_to_ev!*deltag
 !write(*,*) "Total E_Lattice(g) =", ((E_q_lat*((2*pi)/(epsi*volume_neutral )))-(E_q_lat_z*(1/pi*(epsi))))
 !                    E_lat_z= E_lat_z + deltag*(q_model(x,gamma2,beta2,g2)**2)              
 !                    deltag=g2-deltag
@@ -462,31 +478,68 @@ write(*,*) "============================================================"
 ind = 0
 E_r_lat=0.0
 deltax=(volume_neutral/(maxp_sub_charge))
-write(*,*) volume_charge
+n=(-1)*(charge/volume_neutral)
+!write(*,*) volume_charge
 do i3 = 1,mesh_sub_charge(3)
      do i2 = 1,mesh_sub_charge(2)
           do ip=1,mesh_sub_charge(1)
                E_r_lat=E_r_lat+(0.5*(q_model_r(charge,x_d,gamma_d,beta_d,ip,i2,i3,r_0) &
-& + ((-1)*charge/volume_neutral))*(V_lr_p(ip+ind,1)-V_lr(ip+ind,1)) &
-& + ((-1)*charge/volume_neutral)*V_lr(ip+ind,1))               
-!          write(*,*) E_r_lat
+& + (n*(V_lr_p(ip+ind,1)-V_lr(ip+ind,1)))) &
+& + (n*V_lr(ip+ind,1)))               
+!         write(*,*) E_r_lat
           end do
           ind = ind + mesh_sub_charge(1)
      end do
 end do    
-write(*,*) "Total E_lattice (r) =", E_r_lat
-write(*,*) "Total E_lattice (r) =", E_r_lat*deltax
-
-
-
-
+write(*,*) "Total E_lattice (r) =", E_r_lat*deltax*ry_to_ev !*(ang_to_bohr**3)
+!-----------------------------------------------------------------------
+!Calculating Delta 
+!-----------------------------------------------------------------------
+write(*,*) "============================================================"
+write(*,*) "Calculating  Delta V"
+write(*,*) "============================================================"
+allocate(V_sr(maxp_sub_neutral,nspin_sub_charge))
+allocate(deltaV(maxp_sub_neutral,nspin_sub_charge))
+ind=0
+do i3 = 1,mesh_sub_charge(3)
+     do i2 = 1,mesh_sub_charge(2)
+          do ip=1,mesh_sub_charge(1)              
+               deltaV(ind+ip,1)=-f_sub_kind_charge(ind+ip,is)+f_sub_kind_charge(ind+ip,is)+V_lr_p(ind+ip,is)
+               V_sr(ind+ip,1)=f_sub_kind_charge(ind+ip,is)-f_sub_kind_charge(ind+ip,is)-V_lr_p(ind+ip,is)
+!               write(*,*) "Counter = ",ind+ip,"V_sr_not_alligned= ",V_sr(ind+ip,1),"DeltaV = ",deltaV(ind+ip,is)
+               V_sr(ind+ip,1)=f_sub_kind_charge(ind+ip,is)-f_sub_kind_charge(ind+ip,is)-V_lr_p(ind+ip,is)+deltaV(ind+ip,is)
+!               write(*,*) "Counter = ",ind+ip,"V_sr_alligned= ",V_sr(ind+ip,1)
+          end do
+          ind = ind + mesh_sub_charge(1)
+     end do
+end do   
+!-----------------------------------------------------------------------
+!Calculating Delta 
+!-----------------------------------------------------------------------
+write(*,*) "============================================================"
+write(*,*) "Calculating  Delta"
+write(*,*) "============================================================"
+delta=0.0
+ind=0
+do i3 = 1,mesh_sub_charge(3)
+     do i2 = 1,mesh_sub_charge(2)
+          do ip=1,mesh_sub_charge(1)              
+               delta=delta+ V_sr(ind+ip,1)
+!               write(*,*) "Counter = ",ind+ip,"V_sr_alligned= ",V_sr(ind+ip,1)
+          end do
+          ind = ind + mesh_sub_charge(1)
+     end do
+end do   
+write(*,*) "Delta = ",delta*(1/volume_neutral)
 
 deallocate(f_sub_neutral)
 deallocate(f_sub_charge)
 call de_alloc(V_lr_p)
-!deallocate(f_sub_kind_neutral)
-!deallocate(f_sub_kind_charge)
+deallocate(f_sub_kind_neutral)
+deallocate(f_sub_kind_charge)
 deallocate(V_lr)
+deallocate(V_sr)
+deallocate(deltaV)
 !end subroutine test
 End Program Defect
 
@@ -696,3 +749,12 @@ end Function
 !    write(*,101) i_x, f_normal_sub(i_x,i_x,1)
 !end do
 !write(*,*) f_normal_sub(1,2,1,1)
+!integer Function defect_position(d_p,mesh_points)
+!	implicit none
+!	integer      :: mesh_points(3),d_p(3),defect_position(3)
+	
+!	defect_position(1)=int(mesh_points(1)/d_p(1))
+!	defect_position(2)=int(mesh_points(2)/d_p(2))
+!	defect_position(3)=int(mesh_points(3)/d_p(3))
+
+!end Function defect_position
